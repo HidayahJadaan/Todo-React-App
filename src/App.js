@@ -20,6 +20,7 @@ function App() {
     setListOfTodos(updatedTodos);
   };
 
+
   return (
     <div className="TodoWrapper">
       <h1>📝✍️ Today's Tasks 🎯⏰</h1>
@@ -37,7 +38,7 @@ function App() {
             ))
           : ""}
       </div>
-      <p>Add Your First Task 🔥</p>
+      {ListOfTodos.length === 0 ? <p>Add Your First Task 🔥</p> : <p>Remaining Tasks {ListOfTodos.length} 🔥</p>}
     </div>
   );
 }
