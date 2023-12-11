@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import TodoForm from "./components/TodoForm";
 import Task from "./components/Task";
 
@@ -19,10 +19,28 @@ function App() {
     updatedTodos[index] = updatedTask;
     setListOfTodos(updatedTodos);
   };
+ const [isFakeDark, setIsFakeDark] = useState(false);
 
+  // Whenever `isFakeDark` changes, we toggle the `fake-dark-mode` class on the HTML element (see in "Elements" dev tool).
+  useEffect(
+    function () {
+      document.documentElement.classList.toggle("fake-dark-mode");
+    },
+    [isFakeDark]
+  );
 
   return (
+<div>
+      <button
+        onClick={() => setIsFakeDark((isFakeDark) => !isFakeDark)}
+        className="btn-fake-dark-mode"
+      >
+
+        {isFakeDark ? "☀️" :"🌙"}
+         </button>
+
     <div className="TodoWrapper">
+      
       <h1>📝✍️ Today's Tasks 🎯⏰</h1>
 
       <TodoForm AddTask={AddTask} />
@@ -34,12 +52,13 @@ function App() {
                 task={task}
                 deleteTask={() => deleteTask(index)}
                 editTask={(updatedTask) => editTask(index, updatedTask)}
-              />
+                />
             ))
-          : ""}
+            : ""}
       </div>
       {ListOfTodos.length === 0 ? <p>Add Your First Task 🔥</p> : <p>Remaining Tasks {ListOfTodos.length} 🔥</p>}
     </div>
+            </div>
   );
 }
 
