@@ -1,25 +1,27 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import TodoForm from "./components/TodoForm";
 import Task from "./components/Task";
 
 function App() {
-  const [ListOfTodos, setListOfTodos] = useState([]);
+  const [listOfTodos, setListOfTodos] = useState([]);
 
-  const AddTask = (newTask) => {
-    setListOfTodos([...ListOfTodos, newTask]);
+  const addTask = (newTask) => {
+    setListOfTodos([...listOfTodos, newTask]);
   };
 
   const deleteTask = (index) => {
-    const newTodos = ListOfTodos.filter((task, i) => i !== index);
+    const newTodos = listOfTodos.filter((task, i) => i !== index);
     setListOfTodos(newTodos);
   };
 
   const editTask = (index, updatedTask) => {
-    const updatedTodos = [...ListOfTodos];
+    const updatedTodos = [...listOfTodos];
     updatedTodos[index] = updatedTask;
     setListOfTodos(updatedTodos);
   };
- const [isFakeDark, setIsFakeDark] = useState(false);
+
+// ===================== DARK MODE ================================
+  const [isFakeDark, setIsFakeDark] = useState(false);
 
   // Whenever `isFakeDark` changes, we toggle the `fake-dark-mode` class on the HTML element (see in "Elements" dev tool).
   useEffect(
@@ -29,9 +31,14 @@ function App() {
     [isFakeDark]
   );
 
+
+
+
   return (
-<div>
-      <button
+   
+    <div>
+
+<button
         onClick={() => setIsFakeDark((isFakeDark) => !isFakeDark)}
         className="btn-fake-dark-mode"
       >
@@ -39,26 +46,32 @@ function App() {
         {isFakeDark ? "☀️" :"🌙"}
          </button>
 
-    <div className="TodoWrapper">
-      
-      <h1>📝✍️ Today's Tasks 🎯⏰</h1>
+      <div className="TodoWrapper">
+        <h1>📝✍️ Today's Tasks 🎯⏰</h1>
 
-      <TodoForm AddTask={AddTask} />
-      <div className="Todo-List">
-        {ListOfTodos.length > 0
-          ? ListOfTodos.map((task, index) => (
+        <TodoForm AddTask={addTask} />
+
+        <div className="Todo-List">
+          {listOfTodos.length > 0 && (
+            listOfTodos.map((task, index) => (
               <Task
                 key={index}
                 task={task}
                 deleteTask={() => deleteTask(index)}
                 editTask={(updatedTask) => editTask(index, updatedTask)}
-                />
+              />
             ))
-            : ""}
+          ) }
+        </div>
+
+        {listOfTodos.length > 0 ? (
+          <p>Remaining Tasks: {listOfTodos.length} 🔥</p>
+        ): (
+          <h4>Add Your First Task 🔥</h4>
+        )}
       </div>
-      {ListOfTodos.length === 0 ? <p>Add Your First Task 🔥</p> : <p>Remaining Tasks {ListOfTodos.length} 🔥</p>}
+    
     </div>
-            </div>
   );
 }
 

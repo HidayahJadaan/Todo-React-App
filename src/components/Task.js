@@ -1,11 +1,11 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash, faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 
 export default function Task({ task, deleteTask, editTask }) {
   const [isChecked, setIsChecked] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
-  const [editedTask, setEditedTask] = useState(task);
+  const [editedTask, setEditedTask] = useState({ ...task });
 
   const handleCheckboxChange = (e) => {
     setIsChecked(e.target.checked);
@@ -13,11 +13,14 @@ export default function Task({ task, deleteTask, editTask }) {
 
   const handleEditToggle = () => {
     setIsEditing(!isEditing);
-    setEditedTask(task); // Reset editedTask to the original task when toggling edit mode
+    setEditedTask({ ...task }); // Reset editedTask to the original task when toggling edit mode
   };
 
-  const handleInputChange = (e) => {
-    setEditedTask(e.target.value);
+  const handleInputChange = (e, field) => {
+    setEditedTask({
+      ...editedTask,
+      [field]: e.target.value,
+    });
   };
 
   const handleEditConfirm = () => {
@@ -30,15 +33,27 @@ export default function Task({ task, deleteTask, editTask }) {
       <label htmlFor="my-task" className={isChecked ? 'completed' : ""}>
         <input type="checkbox" id="my-task" onChange={handleCheckboxChange} />
         {isEditing ? (
-          <input
-            type="text"
-            value={editedTask}
-            onChange={handleInputChange}
-            onBlur={handleEditConfirm}
-            autoFocus
-          />
+          <div>
+            <input
+              className="todo-input"
+              type="text"
+              value={editedTask.title}
+              onChange={(e) => handleInputChange(e, "title")}
+              autoFocus
+            />
+            <textarea
+              className="todo-input"
+              value={editedTask.body}
+              onChange={(e) => handleInputChange(e, "body")}
+              placeholder="Task body..."
+            />
+            <button onClick={handleEditConfirm} className="btn">Save</button>
+          </div>
         ) : (
-          <span onClick={() => setIsEditing(true)}>{task}</span>
+          <div onClick={() => setIsEditing(true)}>
+            <h3>{task.title}</h3>
+            <p>{task.body}</p>
+          </div>
         )}
       </label>
       <div>
