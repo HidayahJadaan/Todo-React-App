@@ -1,12 +1,6 @@
 # Simple Todo React App
 
-
-![11](https://github.com/HidayahJadaan/Todo-React-App/assets/121747756/b7944ee4-df33-4e3d-a1a1-b596def3f53c)
-![12](https://github.com/HidayahJadaan/Todo-React-App/assets/121747756/d3ca7f87-5bf8-4fec-beb1-5df247ce076d)
-
-# Light Mode
-![LightMode](https://github.com/HidayahJadaan/Todo-React-App/assets/121747756/ea74a509-5b4e-4228-9262-b4f256064ba4)
-
-
-# Dark Mode
-![DarkMode](https://github.com/HidayahJadaan/Todo-React-App/assets/121747756/801a7c58-0cba-4fef-8bc0-41fe81b16754)
+![000](https://github.com/HidayahJadaan/Todo-React-App/assets/121747756/629994f6-bb33-4abe-9452-143bd924a7fd)
+![00](https://github.com/HidayahJadaan/Todo-React-App/assets/121747756/0af581e2-226c-41b1-897d-c3c1e6141d6f)
+![01 (1)](https://github.com/HidayahJadaan/Todo-React-App/assets/121747756/9f6f196e-5bc6-4266-a6d6-9ca2a4fdf1b5)
+![01 (2)](https://github.com/HidayahJadaan/Todo-React-App/assets/121747756/befaf58f-5ca6-4b88-8eb1-968d3eaccf3b)
